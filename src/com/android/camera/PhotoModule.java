@@ -1685,6 +1685,16 @@ public class PhotoModule
             return false;
         }
         switch (keyCode) {
+        case KeyEvent.KEYCODE_HEADSETHOOK:
+            if (mActivity.isInCameraApp() && mFirstTimeInitialized
+                && (mUI.mMenuInitialized)) {
+                if (!ActivityBase.mPowerShutter && !Util.hasCameraKey()) {
+                    onShutterButtonFocus(true);
+                } else {
+                    mUI.onScaleStepResize(true);
+                }
+            }
+            return true;
         case KeyEvent.KEYCODE_VOLUME_UP:
             if (mActivity.isInCameraApp() && mFirstTimeInitialized
                 && (mUI.mMenuInitialized)) {
@@ -1749,6 +1759,11 @@ public class PhotoModule
             return false;
         }
         switch (keyCode) {
+        case KeyEvent.KEYCODE_HEADSETHOOK:
+            if (!ActivityBase.mPowerShutter && !Util.hasCameraKey()) {
+                onShutterButtonClick();
+            }
+            return true;
         case KeyEvent.KEYCODE_VOLUME_UP:
             if (!ActivityBase.mPowerShutter && !Util.hasCameraKey()) {
                 onShutterButtonClick();
